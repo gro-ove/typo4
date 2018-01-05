@@ -1,0 +1,28 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.26430.6
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Typo4", "Typo4\Typo4.csproj", "{DA4972B2-FE8B-433A-918B-7F10AC363971}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TypoLib", "TypoLib\TypoLib.csproj", "{4E6B5C07-5E61-416D-8C23-E650F19A85E9}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Release|x86 = Release|x86
+		Debug|x86 = Debug|x86
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{DA4972B2-FE8B-433A-918B-7F10AC363971}.Release|x86.ActiveCfg = Release|x86
+		{DA4972B2-FE8B-433A-918B-7F10AC363971}.Release|x86.Build.0 = Release|x86
+		{DA4972B2-FE8B-433A-918B-7F10AC363971}.Debug|x86.ActiveCfg = Debug|x86
+		{DA4972B2-FE8B-433A-918B-7F10AC363971}.Debug|x86.Build.0 = Debug|x86
+		{4E6B5C07-5E61-416D-8C23-E650F19A85E9}.Release|x86.ActiveCfg = Release|x86
+		{4E6B5C07-5E61-416D-8C23-E650F19A85E9}.Release|x86.Build.0 = Release|x86
+		{4E6B5C07-5E61-416D-8C23-E650F19A85E9}.Debug|x86.ActiveCfg = Debug|x86
+		{4E6B5C07-5E61-416D-8C23-E650F19A85E9}.Debug|x86.Build.0 = Debug|x86
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

@@ -1,0 +1,3 @@
+url: https://github.com/twitter/twemoji
+content: LICENSE-GRAPHICS
+sid: u905ok0z

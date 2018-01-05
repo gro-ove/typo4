@@ -1,0 +1,3 @@
+url: https://github.com/milesj/emojibase
+content: LICENSE
+sid: 644d1xas

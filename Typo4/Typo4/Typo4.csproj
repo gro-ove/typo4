@@ -1,0 +1,281 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{DA4972B2-FE8B-433A-918B-7F10AC363971}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <RootNamespace>Typo4</RootNamespace>
+    <AssemblyName>Typo4</AssemblyName>
+    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <WarningLevel>4</WarningLevel>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+    <ActualPlatform>$(Platform)</ActualPlatform>
+    <ActualPlatform Condition="'$(ActualPlatform)' == 'AnyCPU'">x86</ActualPlatform>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationManifest>App.manifest</ApplicationManifest>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x86'">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <DefineConstants>TRACE;PLATFORM_X86</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <OutputPath>bin\x86\Release\</OutputPath>
+    <PlatformTarget>x86</PlatformTarget>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x86'">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <DefineConstants>DEBUG;TRACE;PLATFORM_X86</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <OutputPath>bin\x86\Debug\</OutputPath>
+    <PlatformTarget>x86</PlatformTarget>
+  </PropertyGroup>
+  <PropertyGroup>
+    <StartupObject>Typo4.EntryPoint</StartupObject>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>Assets\Icons\AppIcon.ico</ApplicationIcon>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="FirstFloor.ModernUI">
+      <HintPath>..\Libraries\FirstFloor.ModernUI.dll</HintPath>
+    </Reference>
+    <Reference Include="Hardcodet.Wpf.TaskbarNotification, Version=1.0.5.0, Culture=neutral, PublicKeyToken=null">
+      <HintPath>..\packages\Hardcodet.NotifyIcon.Wpf.1.0.8\lib\net451\Hardcodet.Wpf.TaskbarNotification.dll</HintPath>
+    </Reference>
+    <Reference Include="JetBrains.Annotations, Version=11.1.0.0, Culture=neutral, PublicKeyToken=1010a0d8d6380325">
+      <HintPath>..\packages\JetBrains.Annotations.11.1.0\lib\net20\JetBrains.Annotations.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=7.0.0.0, Culture=neutral, PublicKeyToken=null">
+      <HintPath>..\Libraries\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.IO.Compression" />
+    <Reference Include="System.IO.Compression.FileSystem" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xaml">
+      <RequiredTargetFramework>4.0</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="WindowsBase" />
+    <Reference Include="PresentationCore" />
+    <Reference Include="PresentationFramework" />
+    <Reference Include="WindowsFormsIntegration" />
+  </ItemGroup>
+  <ItemGroup>
+    <ApplicationDefinition Include="App.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </ApplicationDefinition>
+    <Compile Include="About\Data.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Data.tt</DependentUpon>
+    </Compile>
+    <Compile Include="About\PieceOfInformation.cs" />
+    <Compile Include="Clipboards\ClipboardEntry.cs" />
+    <Compile Include="Clipboards\ClipboardHistory.cs" />
+    <Compile Include="Clipboards\ClipboardMonitor.cs" />
+    <Compile Include="Clipboards\PasswordsContainer.cs" />
+    <Compile Include="Controls\ClipboardHistoryList.xaml.cs">
+      <DependentUpon>ClipboardHistoryList.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\EmojisList.xaml.cs">
+      <DependentUpon>EmojisList.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\EmojisTabs.xaml.cs">
+      <DependentUpon>EmojisTabs.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\MessageBlock.cs" />
+    <Compile Include="Controls\ModernPopup.xaml.cs">
+      <DependentUpon>ModernPopup.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Emojis\Emoji.cs" />
+    <Compile Include="Emojis\EmojiInformation.cs" />
+    <Compile Include="Emojis\EmojisStorage.cs" />
+    <Compile Include="Emojis\IEmojiLoader.cs" />
+    <Compile Include="Emojis\InformationProviders\EmojiBaseInformationProvider.cs" />
+    <Compile Include="Emojis\InformationProviders\EmojiOneInformationProvider.cs" />
+    <Compile Include="Emojis\InformationProviders\IEmojiInformationProvider.cs" />
+    <Compile Include="Emojis\InformationProviders\InformationProvidersFactory.cs" />
+    <Compile Include="EntryPoint.cs" />
+    <Compile Include="Pages\AboutApp.xaml.cs">
+      <DependentUpon>AboutApp.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\AboutCredits.xaml.cs">
+      <DependentUpon>AboutCredits.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\AboutLicense.xaml.cs">
+      <DependentUpon>AboutLicense.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\SettingsApp.xaml.cs">
+      <DependentUpon>SettingsApp.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\SettingsClipboard.xaml.cs">
+      <DependentUpon>SettingsClipboard.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\SettingsEmoji.xaml.cs">
+      <DependentUpon>SettingsEmoji.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Popups\ClipboardPopup.cs" />
+    <Compile Include="Popups\EmojiPopup.cs" />
+    <Compile Include="Popups\IInsertControl.cs" />
+    <Compile Include="Popups\PopupBase.cs" />
+    <Compile Include="Popups\TextChosenEventArgs.cs" />
+    <Compile Include="RussianWindowsFix.cs" />
+    <Compile Include="TrayInterface.cs" />
+    <Compile Include="TypoModel.cs" />
+    <Page Include="Controls\ClipboardHistoryList.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\EmojisList.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\EmojisTabs.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\ModernPopup.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Pages\AboutApp.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Pages\AboutCredits.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\AboutLicense.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\SettingsApp.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\SettingsClipboard.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Pages\SettingsEmoji.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Windows\MainWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Compile Include="App.xaml.cs">
+      <DependentUpon>App.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Utils\AccentColorSet.cs" />
+    <Compile Include="Utils\Autorun.cs" />
+    <Compile Include="Utils\BuildInformation.cs" />
+    <Compile Include="Utils\FileNameToDisplayNameConverter.cs" />
+    <Compile Include="Utils\FrameworkElementExtension.cs" />
+    <Compile Include="Utils\MuiSystemAccent.cs" />
+    <Compile Include="Windows\MainWindow.xaml.cs">
+      <DependentUpon>MainWindow.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Properties\AssemblyInfo.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <None Include="packages.config" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Page Include="Assets\AppTheme.xaml" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="About\Data.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>Data.cs</LastGenOutput>
+    </None>
+    <Content Include="About\Licenses\AdornedControl\AdornedControl.txt" />
+    <Content Include="About\Licenses\AdornedControl\LICENSE" />
+    <Content Include="About\Licenses\CachedImage\CachedImage.txt" />
+    <Content Include="About\Licenses\CachedImage\LICENSE" />
+    <Content Include="About\Licenses\Emojibase\Emojibase.txt" />
+    <Content Include="About\Licenses\Emojibase\LICENSE" />
+    <Content Include="About\Licenses\FirstFloor.ModernUI\FirstFloor.ModernUI.txt" />
+    <Content Include="About\Licenses\FirstFloor.ModernUI\LICENSE.md" />
+    <Content Include="About\Licenses\Json.NET\Json.NET.txt" />
+    <Content Include="About\Licenses\Json.NET\LICENSE.md" />
+    <Content Include="About\Licenses\MoonSharp\LICENSE" />
+    <Content Include="About\Licenses\MoonSharp\MoonSharp.txt" />
+    <Content Include="About\Licenses\Twemoji\Twemoji.txt" />
+    <Content Include="About\Licenses\Twemoji\LICENSE-GRAPHICS" />
+    <Content Include="About\Licenses\WindowsIcons\license.txt" />
+    <Content Include="About\Licenses\WindowsIcons\WindowsIcons.txt" />
+    <Content Include="About\Licenses\WpfNotifyIcon\WpfNotifyIcon.txt" />
+    <Content Include="App.manifest">
+      <SubType>Designer</SubType>
+    </Content>
+    <Page Include="Assets\AppAssets.xaml" />
+    <Resource Include="Assets\Icons\AppIcon.ico" />
+    <Resource Include="Assets\Icons\TrayIconWin8.ico" />
+    <Resource Include="Assets\Icons\TrayIcon.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\TypoLib\TypoLib.csproj">
+      <Project>{4E6B5C07-5E61-416D-8C23-E650F19A85E9}</Project>
+      <Name>TypoLib</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <PropertyGroup>
+    <PreBuildEvent>cd "$(ProjectDir)\About" &amp; zsh -c "~/bin/t4auto Data.tt *(F)"
+vsincver --smart $(ProjectDir)</PreBuildEvent>
+    <TargetPlatformVersion>8.0</TargetPlatformVersion>
+  </PropertyGroup>
+  <PropertyGroup>
+    <PostBuildEvent>
+    </PostBuildEvent>
+  </PropertyGroup>
+</Project>

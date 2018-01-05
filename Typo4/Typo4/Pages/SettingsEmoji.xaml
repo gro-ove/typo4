@@ -1,0 +1,36 @@
+﻿<UserControl x:Class="Typo4.Pages.SettingsEmoji" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008" xmlns:mui="http://firstfloorsoftware.com/ModernUI" xmlns:typo4="clr-namespace:Typo4"
+    xmlns:utils="clr-namespace:Typo4.Utils" xmlns:io="clr-namespace:System.IO;assembly=mscorlib" xmlns:c="clr-namespace:Typo4.Controls" mc:Ignorable="d"
+    Margin="{StaticResource ContentMarginWithPadding}">
+  <UserControl.Resources>
+    <utils:FileNameToDisplayNameConverter x:Key="FileNameToDisplayNameConverter" />
+    <DataTemplate x:Key="FileInfoDataTemplate" DataType="{x:Type io:FileInfo}">
+      <TextBlock Text="{Binding Name, Converter={StaticResource FileNameToDisplayNameConverter}}" />
+    </DataTemplate>
+  </UserControl.Resources>
+
+  <DockPanel>
+    <c:MessageBlock CloseKey="message.emojis" DockPanel.Dock="Top" Margin="0 0 0 8">
+      <mui:BbCodeBlock
+          BbCode="For example, you can download EmojiOne pack from [url=https://www.emojione.com/]here[/url] and use it instead (required size is 32×32). For better definitions, you can use a JSON-file from [url=https://www.emojicopy.com/]EmojiCopy[/url] (look for something like “emojis.json” with Developer Tools; Typo4 should be able to parse it properly)."
+          Style="{StaticResource Small}" />
+    </c:MessageBlock>
+
+    <mui:SpacingUniformGrid HorizontalSpacing="20" DataContext="{Binding Instance.EmojisStorage, Source={x:Static typo4:TypoModel.Instance}}" Rows="1">
+      <DockPanel>
+        <TextBlock Text="Images:" Style="{StaticResource Heading2}" DockPanel.Dock="Top" Margin="0 0 0 4" />
+        <Button DockPanel.Dock="Bottom" Content="Open folder" Margin="0 4 0 0" Command="{Binding ViewGraphicsDirectoryCommand}" />
+        <ListBox ItemsSource="{Binding GraphicsFiles}" SelectedItem="{Binding SelectedGraphics}" ItemTemplate="{StaticResource FileInfoDataTemplate}"
+            Style="{StaticResource VirtualizingListBox}" ItemContainerStyle="{StaticResource RadioBoxListItem}" />
+      </DockPanel>
+      <DockPanel>
+        <TextBlock Text="Definitions:" Style="{StaticResource Heading2}" DockPanel.Dock="Top" Margin="0 0 0 4" />
+        <Button DockPanel.Dock="Bottom" Content="Open folder" Margin="0 4 0 0" Command="{Binding ViewDescriptionsDirectoryCommand}" />
+        <ListBox ItemsSource="{Binding DescriptionFiles}" SelectedItem="{Binding SelectedDescription}" ItemTemplate="{StaticResource FileInfoDataTemplate}"
+            Style="{StaticResource VirtualizingListBox}" ItemContainerStyle="{StaticResource RadioBoxListItem}" />
+      </DockPanel>
+    </mui:SpacingUniformGrid>
+
+  </DockPanel>
+</UserControl>

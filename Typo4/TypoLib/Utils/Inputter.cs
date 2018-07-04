@@ -86,12 +86,12 @@ namespace TypoLib.Utils {
                         new User32.KeyboardInput {
                             ScanCode = chars[i],
                             Flags = User32.KeyboardFlag.Unicode,
-                            ExtraInfo = (uint)KeyboardListener.AppEventFlag
+                            ExtraInfo = KeyboardListener.AppEventFlag
                         },
                         new User32.KeyboardInput {
                             ScanCode = chars[i],
                             Flags = User32.KeyboardFlag.Unicode | User32.KeyboardFlag.KeyUp,
-                            ExtraInfo = (uint)KeyboardListener.AppEventFlag
+                            ExtraInfo = KeyboardListener.AppEventFlag
                         });
             }
         }
@@ -253,7 +253,7 @@ namespace TypoLib.Utils {
                 User32.SendInput(new User32.KeyboardInput {
                     ScanCode = ToScanCode(values[i]),
                     Flags = User32.KeyboardFlag.ScanCode,
-                    ExtraInfo = (uint)KeyboardListener.AppEventFlag
+                    ExtraInfo = KeyboardListener.AppEventFlag
                 });
                 await Task.Delay(Delay);
             }
@@ -262,7 +262,7 @@ namespace TypoLib.Utils {
                 User32.SendInput(new User32.KeyboardInput {
                     ScanCode = ToScanCode(values[i]),
                     Flags = User32.KeyboardFlag.ScanCode | User32.KeyboardFlag.KeyUp,
-                    ExtraInfo = (uint)KeyboardListener.AppEventFlag
+                    ExtraInfo = KeyboardListener.AppEventFlag
                 });
                 await Task.Delay(Delay);
             }
@@ -302,7 +302,7 @@ namespace TypoLib.Utils {
                 User32.SendInput(new User32.KeyboardInput {
                     ScanCode = ToScanCode(pressed[i]),
                     Flags = User32.KeyboardFlag.ScanCode | User32.KeyboardFlag.KeyUp,
-                    ExtraInfo = (uint)KeyboardListener.AppEventFlag
+                    ExtraInfo = KeyboardListener.AppEventFlag
                 });
                 await Task.Delay(Delay);
             }
@@ -313,7 +313,7 @@ namespace TypoLib.Utils {
                     User32.SendInput(new User32.KeyboardInput {
                         ScanCode = ToScanCode(pressed[i]),
                         Flags = User32.KeyboardFlag.ScanCode,
-                        ExtraInfo = (uint)KeyboardListener.AppEventFlag
+                        ExtraInfo = KeyboardListener.AppEventFlag
                     });
                     await Task.Delay(Delay);
                 }

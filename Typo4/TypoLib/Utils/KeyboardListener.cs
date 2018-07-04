@@ -52,7 +52,7 @@ namespace TypoLib.Utils {
         }
 
         #region Static part
-        public static readonly int AppEventFlag = Math.Abs("typo4".GetHashCode());
+        public static readonly uint AppEventFlag = (uint)Math.Abs("typo4".GetHashCode());
 
         private static readonly List<KeyboardListener> Subscribed;
         private static int _hookHandle;

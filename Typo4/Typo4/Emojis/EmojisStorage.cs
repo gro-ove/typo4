@@ -13,7 +13,6 @@ using FirstFloor.ModernUI.Presentation;
 using FirstFloor.ModernUI.Windows.Controls;
 using JetBrains.Annotations;
 using Typo4.Emojis.InformationProviders;
-using TypoLib.Utils;
 using TypoLib.Utils.Common;
 
 namespace Typo4.Emojis {

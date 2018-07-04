@@ -1,8 +1,9 @@
 ﻿using System;
+using System.IO;
+using System.IO.Compression;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Interop;
 using System.Windows.Media;
 using System.Windows.Media.Animation;
 using FirstFloor.ModernUI.Helpers;
@@ -13,7 +14,6 @@ using FirstFloor.ModernUI.Windows.Controls;
 using Typo4.Utils;
 using TypoLib.Utils;
 using TypoLib.Utils.Common;
-using TypoLib.Utils.Windows;
 using Logging = FirstFloor.ModernUI.Helpers.Logging;
 
 namespace Typo4 {
@@ -28,6 +28,12 @@ namespace Typo4 {
             CacheStorage.Initialize();
             Logging.Initialize(TypoModel.LogFilename, false);
             Logging.Write($"App version: {BuildInformation.AppVersion} ({BuildInformation.Platform}, {WindowsVersionHelper.GetVersion()})");
+
+            if (Directory.GetFiles(TypoModel.DataDirectory).Length == 0) {
+                using (var memory = new MemoryStream(Typo4.Properties.Resources.Typo4Data)) {
+                    new ZipArchive(memory).ExtractToDirectory(TypoModel.DataDirectory);
+                }
+            }
 
             AppearanceManager.Current.Initialize();
             AppearanceManager.Current.SetTheme(new Uri("pack://application:,,,/Typo4;component/Assets/AppTheme.xaml", UriKind.Absolute));

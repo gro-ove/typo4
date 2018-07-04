@@ -1,7 +1,5 @@
 ﻿using System;
-using System.Diagnostics;
 using System.Threading;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
@@ -10,7 +8,6 @@ using FirstFloor.ModernUI.Windows;
 using Hardcodet.Wpf.TaskbarNotification;
 using Typo4.Utils;
 using Typo4.Windows;
-using TypoLib.Utils;
 using TypoLib.Utils.Common;
 
 namespace Typo4 {
@@ -25,13 +22,13 @@ namespace Typo4 {
                 ToolTipText = "Typo4 is running",
                 ContextMenu = new ContextMenu {
                     Items = {
-                        new MenuItem { Header = "Open Data Directory", Command = _model.OpenDataDirectoryCommand },
-                        new MenuItem { Header = "Run Typo4 When My Computer Starts", IsCheckable = true }.AddBinding(MenuItem.IsCheckedProperty,
+                        new MenuItem { Header = "Open data directory", Command = _model.OpenDataDirectoryCommand },
+                        new MenuItem { Header = "Run Typo4 when my computer starts", IsCheckable = true }.AddBinding(MenuItem.IsCheckedProperty,
                                 new Binding { Path = new PropertyPath(nameof(_model.Autorun.IsActive)), Source = _model.Autorun, Mode = BindingMode.TwoWay }),
                         new MenuItem { Header = "Settings", Command = new DelegateCommand(WakeUp) },
 #if DEBUG
                         new Separator(),
-                        new MenuItem { Header = "Debug Window", IsCheckable = true }.AddBinding(MenuItem.IsCheckedProperty,
+                        new MenuItem { Header = "Debug window", IsCheckable = true }.AddBinding(MenuItem.IsCheckedProperty,
                                 new Binding { Path = new PropertyPath(nameof(model.Typo.IsDebugFormActive)), Source = model.Typo, Mode = BindingMode.TwoWay }),
 #endif
                         new Separator(),

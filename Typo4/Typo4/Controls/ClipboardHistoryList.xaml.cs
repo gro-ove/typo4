@@ -2,7 +2,6 @@
 using System.Linq;
 using System.Windows;
 using System.Windows.Forms;
-using System.Windows.Input;
 using FirstFloor.ModernUI;
 using FirstFloor.ModernUI.Presentation;
 using JetBrains.Annotations;
@@ -10,7 +9,6 @@ using Typo4.Clipboards;
 using Typo4.Popups;
 using TypoLib.Utils;
 using TypoLib.Utils.Common;
-using TypoLib.Utils.Windows;
 using Clipboard = System.Windows.Clipboard;
 
 namespace Typo4.Controls {

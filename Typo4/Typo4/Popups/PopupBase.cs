@@ -6,16 +6,13 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media;
-using FirstFloor.ModernUI.Helpers;
 using FirstFloor.ModernUI.Presentation;
 using FirstFloor.ModernUI.Windows.Controls;
 using JetBrains.Annotations;
-using Typo4.Emojis;
 using Typo4.Utils;
 using TypoLib.Inserters;
 using TypoLib.Utils;
 using TypoLib.Utils.Common;
-using TypoLib.Utils.Windows;
 using Keys = System.Windows.Forms.Keys;
 
 namespace Typo4.Popups {

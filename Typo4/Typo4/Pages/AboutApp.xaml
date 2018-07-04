@@ -1,7 +1,7 @@
 ﻿<UserControl x:Class="Typo4.Pages.AboutApp" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    xmlns:d="http://schemas.microsoft.com/expression/blend/2008" xmlns:local="clr-namespace:Typo4.Pages" xmlns:mui="http://firstfloorsoftware.com/ModernUI"
-    xmlns:typo4="clr-namespace:Typo4" mc:Ignorable="d" Margin="{StaticResource ContentMarginWithPadding}">
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008" xmlns:mui="http://firstfloorsoftware.com/ModernUI" xmlns:typo4="clr-namespace:Typo4"
+    mc:Ignorable="d" Margin="{StaticResource ContentMarginWithPadding}">
 
   <Grid>
     <Grid.RowDefinitions>
@@ -15,7 +15,7 @@
           <Image Source="/Assets/Icons/AppIcon.ico" Width="40" Height="40" DockPanel.Dock="Left" Margin="0 0 12 0" />
           <StackPanel>
             <TextBlock Style="{StaticResource Heading1}" Margin="-2 0 0 0" Text="Typo4" />
-            <mui:BbCodeBlock Style="{StaticResource Small}" BbCode="Tool to extend Caps Lock behavior allowing to type more symbols, improve texts and more" />
+            <mui:BbCodeBlock Style="{StaticResource Small}" BbCode="Tool extending Caps Lock behavior" />
           </StackPanel>
         </DockPanel>
 
@@ -28,7 +28,7 @@
     </ScrollViewer>
 
     <StackPanel Grid.Row="1" Margin="20 12">
-      <TextBlock Style="{StaticResource Small}" Text="Copyright © 2017 x4fab." />
+      <TextBlock Style="{StaticResource Small}" Text="Copyright © 2017–2018 x4fab." />
       <mui:BbCodeBlock Style="{StaticResource BbCodeBlock.Small}"
           BbCode="Typo4 is made possible by some [url=/Pages/AboutCredits.xaml|_top]open source software and graphics[/url].
 Typo4 [url=/Pages/AboutLicense.xaml|_top]License[/url]." />

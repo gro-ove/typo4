@@ -3,7 +3,6 @@ using System.IO;
 using System.Threading;
 using System.Threading.Tasks;
 using EdgeJs;
-using TypoLib.Utils;
 
 namespace TypoLib.Replacers.ScriptInterpreters {
     public class JsInterpreter : IScriptInterpreter {

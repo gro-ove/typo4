@@ -1,7 +1,8 @@
 ﻿<UserControl x:Class="Typo4.Controls.EmojisList" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008" xmlns:local="clr-namespace:Typo4.Controls" xmlns:mui="http://firstfloorsoftware.com/ModernUI"
-    mc:Ignorable="d" d:DataContext="{d:DesignInstance local:EmojisList+ViewModel}" Loaded="OnLoaded" Unloaded="OnUnloaded">
+    xmlns:emojis="clr-namespace:Typo4.Emojis" mc:Ignorable="d" d:DataContext="{d:DesignInstance local:EmojisList+ViewModel}" Loaded="OnLoaded"
+    Unloaded="OnUnloaded">
   <UserControl.Resources>
     <ResourceDictionary>
       <ItemsPanelTemplate x:Key="VirtualizingTilePanel">
@@ -17,12 +18,12 @@
       <BitmapCache EnableClearType="False" RenderAtScale="1" />
     </ItemsControl.CacheMode>-->
     <ItemsControl.ItemTemplate>
-      <DataTemplate>
-        <mui:Cell x:Name="Image" Background="Transparent" PreviewMouseLeftButtonDown="OnClick"
-            PreviewMouseRightButtonDown="OnContextMenu" PreviewMouseRightButtonUp="OnClick" Height="40" Width="40">
+      <DataTemplate DataType="emojis:Emoji">
+        <mui:Cell x:Name="Image" Background="Transparent" PreviewMouseLeftButtonDown="OnClick" PreviewMouseRightButtonDown="OnContextMenu"
+            PreviewMouseRightButtonUp="OnClick" Height="40" Width="40">
           <mui:BetterImage ImageSource="{Binding Image.Value}" Margin="4" ToolTip="{Binding Information.Name}" />
-          <Path x:Name="HasAlternatives" Width="12" Height="12" Margin="1" Stroke="#FFFFFF" StrokeThickness="1" Stretch="None"
-              HorizontalAlignment="Right" VerticalAlignment="Bottom" Visibility="Collapsed"
+          <Path x:Name="HasAlternatives" Width="12" Height="12" Margin="1" Stroke="#FFFFFF" StrokeThickness="1" Stretch="None" HorizontalAlignment="Right"
+              VerticalAlignment="Bottom" Visibility="Collapsed"
               Data="F1 M1,10 L3,10 M5,10 L7,10 M9,10 L11,10 M2,9 L2,11 M6,9 L6,11 M10,9 L10,11 M5,6 L7,6 M9,6 L11,6 M6,5 L6,7 M10,5 L10,7 M9,2 L11,2 M10,1 L10,3" />
         </mui:Cell>
         <DataTemplate.Triggers>

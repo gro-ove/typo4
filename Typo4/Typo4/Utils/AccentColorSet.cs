@@ -22,10 +22,8 @@ CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE. */
 
 using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Runtime.InteropServices;
 using System.Windows.Media;
-using FirstFloor.ModernUI.Helpers;
 
 namespace Typo4.Utils {
     public class AccentColorSet {

@@ -1,5 +1,4 @@
 ﻿using System;
-using MoonSharp.Interpreter;
 
 namespace TypoLib.Utils.Lua {
     public class LuaUnicode {

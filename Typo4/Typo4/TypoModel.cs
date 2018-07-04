@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Diagnostics;
 using System.IO;
-using System.Runtime.InteropServices.WindowsRuntime;
 using FirstFloor.ModernUI.Commands;
 using FirstFloor.ModernUI.Helpers;
 using FirstFloor.ModernUI.Presentation;
@@ -11,7 +10,6 @@ using Typo4.Emojis;
 using Typo4.Popups;
 using Typo4.Utils;
 using TypoLib;
-using TypoLib.Utils;
 using TypoLib.Utils.Common;
 
 namespace Typo4 {
@@ -107,7 +105,7 @@ namespace Typo4 {
             _typo.AddInserter(new ClipboardPopup(_clipboardHistory));
 
             // Special fix for Russian Windows
-            RussianKeyboardFix = ValuesStorage.GetBool("settings.russianKeyboardFix", true);
+            RussianKeyboardFix = ValuesStorage.GetBool("settings.russianKeyboardFix");
         }
 
         #region Commands

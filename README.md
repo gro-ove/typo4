@@ -3,14 +3,8 @@ Tool extending Caps Lock behavior. With it, you can quickly type various Unicode
 view recent clipboard items, calculate mathematical expressions, insert emojis and more. Everything 
 is fully customizable, with Lua/Node.JS scripts.
 
-For now, it’s WIP, so if you want to try it, you’ll need to manually copy Typo4Data 
-to AppData\Roaming as Typo4.
-
 ### TODO:
 
-- Add data into EXE-file to be installed automatically;
-- Switch from Enigma VB to Costura;
-- Make a first release;
 - Sometimes, rarely, 6.Random.js script crashes app, figure out why;
 - Find a way to improve compatibility with UWP apps?
 

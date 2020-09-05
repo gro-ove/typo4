@@ -6,11 +6,11 @@ using System.Windows;
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
 [assembly: AssemblyTitle("Typo4")]
-[assembly: AssemblyDescription("Extending Caps Lock behavior app")]
+[assembly: AssemblyDescription("Changes role of Caps Lock button to something more suitable for a button of such size")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
 [assembly: AssemblyProduct("Typo4")]
-[assembly: AssemblyCopyright("Copyright © x4fab, 2017")]
+[assembly: AssemblyCopyright("Copyright © x4fab, 2020")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
@@ -52,6 +52,6 @@ using System.Windows;
 // You can specify all the values or you can default the Build and Revision Numbers
 // by using the '*' as shown below:
 // [assembly: AssemblyVersion("1.0.*")]
-[assembly: AssemblyVersion("0.9.4.53")]
-[assembly: AssemblyFileVersion("0.9.4.53")]
+[assembly: AssemblyVersion("1.0.0.1")]
+[assembly: AssemblyFileVersion("1.0.0.1")]
 // Modified at: 18/07/04 08:40:03

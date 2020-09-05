@@ -1,4 +1,4 @@
-# typo4
+# Typo4
 A small tool replacing Caps Lock behavior. With it, you can quickly type various Unicode characters, 
 automatically add the to text you’re typing, calculate mathematical expressions and more. Most of it 
 is customizable, driven by Lua scripts. It can also keep track of clipboard history and help you pick

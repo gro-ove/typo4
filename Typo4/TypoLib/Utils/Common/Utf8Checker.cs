@@ -1,138 +1,45 @@
-﻿using System;
-
-namespace TypoLib.Utils.Common {
+﻿namespace TypoLib.Utils.Common {
     public static class Utf8Checker {
-        public static bool IsUtf8(byte[] buffer, int limit = int.MaxValue) {
-            var position = 0;
-            var bytes = 0;
-            var length = buffer.Length;
-            while (position < length && position < limit) {
-                if (buffer[position] > 0x7F) {
-                    if (!IsValid(buffer, position, length, ref bytes)) {
+        /// <summary>
+        /// Returns true if the given buffer is valid UTF8 chars.
+        /// If the buffer is null or has no chars, then return true.
+        /// </summary>
+        /// <param name="buffer">Array of byte values to evaluate</param>
+        /// <param name="length">Length of buffer; if -1 (the default) then the entire buffer will be checked </param>
+        /// <returns></returns>
+        public static bool IsUtf8(byte[] buffer, int length = -1) {
+            if (buffer == null) return true; // null buffes are Utf8 (there aren't any invalid bytes)
+            if (length == -1) length = buffer.Length;
+            if (length > buffer.Length) return false;
+            for (var i = 0; i < length; i++) {
+                var tailLength = Nextra(buffer[i]);
+                if (tailLength < 0) return false;
+                for (int j = 0; j < tailLength; j++) {
+                    var index = i + j + 1;
+                    if (index >= length) {
                         return false;
                     }
-                    position += bytes;
-                } else {
-                    position++;
+                    byte b = buffer[index];
+                    if ((b & ~0x3F) != 0x80) {
+                        return false;
+                    }
                 }
+                i += tailLength;
             }
             return true;
         }
 
-        private static bool IsValid(byte[] buffer, int position, int length, ref int bytes) {
-            if (length > buffer.Length) {
-                throw new ArgumentException("Invalid length");
+        private static int Nextra(byte b) {
+            if ((b & ~0x7F) == 0) {
+                return 0; // is 7-bit ascii
+            } else if ((b & ~0x1F) == 0xC0) {
+                return 1; // is 2-byte
+            } else if ((b & ~0x0F) == 0xE0) {
+                return 2; // is 3-byte
+            } else if ((b & ~0x07) == 0xF0) {
+                return 3; // is 4-byte
             }
-
-            if (position > length - 1) {
-                bytes = 0;
-                return true;
-            }
-
-            var ch = buffer[position];
-
-            if (ch <= 0x7F) {
-                bytes = 1;
-                return true;
-            }
-
-            if (ch >= 0xc2 && ch <= 0xdf) {
-                if (position >= length - 2) {
-                    bytes = 0;
-                    return false;
-                }
-                if (buffer[position + 1] < 0x80 || buffer[position + 1] > 0xbf) {
-                    bytes = 0;
-                    return false;
-                }
-                bytes = 2;
-                return true;
-            }
-
-            if (ch == 0xe0) {
-                if (position >= length - 3) {
-                    bytes = 0;
-                    return false;
-                }
-
-                if (buffer[position + 1] < 0xa0 || buffer[position + 1] > 0xbf ||
-                    buffer[position + 2] < 0x80 || buffer[position + 2] > 0xbf) {
-                    bytes = 0;
-                    return false;
-                }
-                bytes = 3;
-                return true;
-            }
-
-
-            if (ch >= 0xe1 && ch <= 0xef) {
-                if (position >= length - 3) {
-                    bytes = 0;
-                    return false;
-                }
-
-                if (buffer[position + 1] < 0x80 || buffer[position + 1] > 0xbf ||
-                    buffer[position + 2] < 0x80 || buffer[position + 2] > 0xbf) {
-                    bytes = 0;
-                    return false;
-                }
-
-                bytes = 3;
-                return true;
-            }
-
-            if (ch == 0xf0) {
-                if (position >= length - 4) {
-                    bytes = 0;
-                    return false;
-                }
-
-                if (buffer[position + 1] < 0x90 || buffer[position + 1] > 0xbf ||
-                    buffer[position + 2] < 0x80 || buffer[position + 2] > 0xbf ||
-                    buffer[position + 3] < 0x80 || buffer[position + 3] > 0xbf) {
-                    bytes = 0;
-                    return false;
-                }
-
-                bytes = 4;
-                return true;
-            }
-
-            if (ch == 0xf4) {
-                if (position >= length - 4) {
-                    bytes = 0;
-                    return false;
-                }
-
-                if (buffer[position + 1] < 0x80 || buffer[position + 1] > 0x8f ||
-                    buffer[position + 2] < 0x80 || buffer[position + 2] > 0xbf ||
-                    buffer[position + 3] < 0x80 || buffer[position + 3] > 0xbf) {
-                    bytes = 0;
-                    return false;
-                }
-
-                bytes = 4;
-                return true;
-            }
-
-            if (ch >= 0xf1 && ch <= 0xf3) {
-                if (position >= length - 4) {
-                    bytes = 0;
-                    return false;
-                }
-
-                if (buffer[position + 1] < 0x80 || buffer[position + 1] > 0xbf ||
-                    buffer[position + 2] < 0x80 || buffer[position + 2] > 0xbf ||
-                    buffer[position + 3] < 0x80 || buffer[position + 3] > 0xbf) {
-                    bytes = 0;
-                    return false;
-                }
-
-                bytes = 4;
-                return true;
-            }
-
-            return false;
+            return -1; // is not valid UTF8
         }
     }
 }

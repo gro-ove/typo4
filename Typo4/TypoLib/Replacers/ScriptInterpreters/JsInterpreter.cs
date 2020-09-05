@@ -1,22 +1,42 @@
-﻿using System;
+﻿/*using System;
 using System.IO;
+using System.Runtime.CompilerServices;
 using System.Threading;
 using System.Threading.Tasks;
 using EdgeJs;
+using TypoLib.Utils;*/
 
 namespace TypoLib.Replacers.ScriptInterpreters {
-    public class JsInterpreter : IScriptInterpreter {
+    /*public class JsInterpreter : IScriptInterpreter {
         public void Initialize(string scripsDirectory) {}
 
-        public async Task<string> ExecuteAsync(string filename, string originalText, CancellationToken cancellation) {
-            var js = File.ReadAllText(filename);
-            if (js.IndexOf("\"edge aware\"", StringComparison.OrdinalIgnoreCase) == -1 &&
-                    js.IndexOf("\"edge-aware\"", StringComparison.OrdinalIgnoreCase) == -1 &&
-                    js.IndexOf("\"edgeaware\"", StringComparison.OrdinalIgnoreCase) == -1) {
-                js = $"return function (input, callback){{\nconsole.log = function (result){{ callback(null, result); }};\n{js}\n}}";
-            }
+        [MethodImpl(MethodImplOptions.NoInlining)]
+        private async Task<string> ExecuteSafeAsync(string js, string originalText) {
+            var func = Edge.Func(js);
+            TypoLogging.Write("Run JS: func=" + js);
 
-            return (await Edge.Func(js)(originalText)).ToString();
+            var task = func(originalText);
+            TypoLogging.Write("Run JS: task=" + js);
+
+            var ret = await task;
+            TypoLogging.Write("Run JS: ret=" + js);
+
+            return ret.ToString();
+        }
+
+        public async Task<string> ExecuteAsync(string filename, string originalText, CancellationToken cancellation) {
+            try {
+                var js = File.ReadAllText(filename);
+                if (js.IndexOf("\"edge aware\"", StringComparison.OrdinalIgnoreCase) == -1 &&
+                        js.IndexOf("\"edge-aware\"", StringComparison.OrdinalIgnoreCase) == -1 &&
+                        js.IndexOf("\"edgeaware\"", StringComparison.OrdinalIgnoreCase) == -1) {
+                    js = $"return function (input, callback){{\nconsole.log = function (result){{ callback(null, result); }};\n{js}\n}}";
+                }
+                TypoLogging.Write("Run JS: command=" + js);
+                return await ExecuteSafeAsync(js, originalText);
+            } catch (DllNotFoundException) {
+                return "[ DLL for JS interpeter is missing ]";
+            }
         }
 
         public bool IsInputSupported(string filename) {
@@ -26,5 +46,5 @@ namespace TypoLib.Replacers.ScriptInterpreters {
         }
 
         public void Dispose() { }
-    }
+    }*/
 }

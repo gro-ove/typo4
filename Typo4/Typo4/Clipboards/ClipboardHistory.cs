@@ -56,7 +56,6 @@ namespace Typo4.Clipboards {
 
             Inputter.ClipboardHold += OnClipboardHold;
             Inputter.ClipboardRelease += OnClipboardRelease;
-
             ClipboardMonitor.ClipboardChange += OnClipboardChange;
         }
 
@@ -118,14 +117,20 @@ namespace Typo4.Clipboards {
         #endregion
 
         #region Inputter-compatibility piece
-        private static int _clipboardHolded;
+        private static int _clipboardHeld;
 
         private void OnClipboardHold(object sender, EventArgs eventArgs) {
-            _clipboardHolded++;
+            ClipboardMonitor.ClipboardChange -= OnClipboardChange;
+            _clipboardHeld++;
         }
 
         private void OnClipboardRelease(object sender, EventArgs eventArgs) {
-            _clipboardHolded--;
+            _clipboardHeld--;
+            try {
+                ClipboardMonitor.ClipboardChange += OnClipboardChange;
+            } catch (Exception e) {
+                Logging.Warning(e);
+            }
         }
         #endregion
 
@@ -137,7 +142,7 @@ namespace Typo4.Clipboards {
             try {
                 if (!Clipboard.ContainsText()) return null;
                 var data = Clipboard.GetText();
-                return string.IsNullOrEmpty(data) ? null : data;
+                return string.IsNullOrEmpty(data) || data.Length > 20000 ? null : data;
             } catch (Exception e) {
                 Logging.Warning(e);
                 return null;
@@ -147,10 +152,9 @@ namespace Typo4.Clipboards {
         /// <summary>
         /// Handles clipboard changed events.
         /// </summary>
-        private void OnClipboardChange(object sender, EventArgs eventArgs) {
-            if (_clipboardHolded > 0) return;
-
-            (Application.Current?.Dispatcher ?? Dispatcher.CurrentDispatcher).InvokeAsync(() => { Add(GetClipboardText()); });
+        private void OnClipboardChange(object sender, EventArgs e) {
+            if (_clipboardHeld > 0) return;
+            (Application.Current?.Dispatcher ?? Dispatcher.CurrentDispatcher).InvokeAsync(() => Add(GetClipboardText()));
         }
 
         /// <summary>

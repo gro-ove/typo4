@@ -173,7 +173,7 @@ namespace TypoLib.Utils.Common {
                 TypoLogging.Write("Management failed!");*/
 
                 // won’t work if processes were compiled for different architectures
-                path = process.MainModule.FileName;
+                path = process.MainModule?.FileName;
                 TypoLogging.Write("MainModule.FileName: " + path);
                 return path;
             } catch (Exception e) {

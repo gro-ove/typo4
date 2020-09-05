@@ -35,9 +35,6 @@
     <PlatformTarget>x86</PlatformTarget>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="EdgeJs, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null">
-      <HintPath>..\packages\Edge.js.8.2.1\lib\net40\EdgeJs.dll</HintPath>
-    </Reference>
     <Reference Include="JetBrains.Annotations, Version=11.1.0.0, Culture=neutral, PublicKeyToken=1010a0d8d6380325">
       <HintPath>..\packages\JetBrains.Annotations.11.1.0\lib\net20\JetBrains.Annotations.dll</HintPath>
     </Reference>
@@ -100,17 +97,11 @@
     <Compile Include="Utils\Windows\User32.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Edge\double_edge.js" />
-    <None Include="Edge\edge.js" />
-    <None Include="Edge\x64\edge_nativeclr.node" />
-    <None Include="Edge\x64\node.dll" />
-    <None Include="Edge\x86\edge_nativeclr.node" />
-    <None Include="Edge\x86\node.dll" />
     <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
-    <PreBuildEvent>vsincver --smart $(ProjectDir)</PreBuildEvent>
+    <PreBuildEvent>rem vsincver --smart $(ProjectDir)</PreBuildEvent>
     <TargetPlatformVersion>8.0</TargetPlatformVersion>
   </PropertyGroup>
   <PropertyGroup>

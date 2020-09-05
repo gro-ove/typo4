@@ -13,7 +13,8 @@ namespace Typo4.Clipboards {
         private string _displayValue, _shortValue;
 
         [NotNull]
-        public string DisplayValue => _displayValue ?? (_displayValue = BbCodeBlock.Encode(Value));
+        public string DisplayValue => _displayValue ?? (_displayValue = BbCodeBlock.Encode(Value.Length > 200
+                ? Value.Substring(0, 1000) + "…" : Value));
 
         [NotNull]
         public string ShortValue => _shortValue ?? (_shortValue = DisplayValue.Replace("\r", "").Replace("\n", "[color=\"#4cFFFFFF\"]⮒[/color]"));

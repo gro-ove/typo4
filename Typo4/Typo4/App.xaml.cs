@@ -40,7 +40,7 @@ namespace Typo4 {
             AppearanceManager.Current.BoldTitleLinks = false;
             AppearanceManager.Current.LargerTitleLinks = false;
             AppearanceManager.Current.SubMenuFontSize = FontSize.Small;
-            Resources.MergedDictionaries.Add(new ResourceDictionary{
+            Resources.MergedDictionaries.Add(new ResourceDictionary {
                 Source = new Uri("pack://application:,,,/Typo4;component/Assets/AppAssets.xaml", UriKind.Absolute)
             });
 
@@ -112,8 +112,17 @@ namespace Typo4 {
         private TrayInterface _trayInterface;
 
         private void OnProcessExit(object sender, EventArgs e) {
-            DisposeHelper.Dispose(ref _trayInterface);
-            DisposeHelper.Dispose(ref _typoModel);
+            try {
+                DisposeHelper.Dispose(ref _trayInterface);
+            } catch {
+                /* nothing */
+            }
+
+            try {
+                DisposeHelper.Dispose(ref _typoModel);
+            } catch {
+                /* nothing */
+            }
         }
 
         Uri IAppIconProvider.GetTrayIcon() {

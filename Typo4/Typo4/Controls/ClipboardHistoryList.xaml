@@ -78,12 +78,22 @@
   </UserControl.Resources>
   <ScrollViewer HorizontalScrollBarVisibility="Disabled">
     <StackPanel>
-      <TextBlock Text="Pinned" Height="20" VerticalAlignment="Center" Margin="8 8 0 0" Foreground="#BBBBBB" Style="{StaticResource Small}"
-          Visibility="{Binding Pinned.Count, Converter={StaticResource MoreToVisibilityConverter}}" />
+      <DockPanel>
+        <TextBlock Text="Pinned" Height="20" VerticalAlignment="Center" Margin="8 8 0 0" Foreground="#BBBBBB" Style="{StaticResource Small}"
+            Visibility="{Binding Pinned.Count, Converter={StaticResource MoreToVisibilityConverter}}" />
+      </DockPanel>
       <ItemsControl ItemsSource="{Binding Pinned}" ItemTemplate="{StaticResource ItemTemplate}" Margin="0 0 0 8"
           Visibility="{Binding Pinned.Count, Converter={StaticResource MoreToVisibilityConverter}}" />
-      <TextBlock Text="Recent" Height="20" VerticalAlignment="Center" Margin="8 8 0 0" Foreground="#BBBBBB" Style="{StaticResource Small}"
-          Visibility="{Binding Recent.Count, Converter={StaticResource MoreToVisibilityConverter}}" />
+      <DockPanel Visibility="{Binding Recent.Count, Converter={StaticResource MoreToVisibilityConverter}}" Background="Transparent" Margin="8 8 0 0">
+        <TextBlock Text="Recent" Height="20" VerticalAlignment="Center" Foreground="#BBBBBB" Style="{StaticResource Small}" />
+        <Button HorizontalAlignment="Left" VerticalAlignment="Center" Command="{Binding RemoveRecentCommand}" Padding="4" BorderThickness="0" Margin="8 -2 0 2"
+            Visibility="{Binding IsMouseOver, RelativeSource={RelativeSource AncestorType=DockPanel}, Converter={StaticResource BooleanToVisibilityConverter}}">
+          <Path Width="6" Height="6" HorizontalAlignment="Center" VerticalAlignment="Center" Stretch="Uniform"
+              Fill="{Binding Path=(TextBlock.Foreground), RelativeSource={RelativeSource Self}}"
+              Data="F1 M 26.9166,22.1667L 37.9999,33.25L 49.0832,22.1668L 53.8332,26.9168L 42.7499,38L 53.8332,49.0834L 49.0833,53.8334L 37.9999,42.75L 26.9166,53.8334L 22.1666,49.0833L 33.25,38L 22.1667,26.9167L 26.9166,22.1667 Z"
+              ToolTip="Remove all recent entries" Margin="2" />
+        </Button>
+      </DockPanel>
       <ItemsControl ItemsSource="{Binding Recent}" ItemTemplate="{StaticResource ItemTemplate}" />
     </StackPanel>
   </ScrollViewer>

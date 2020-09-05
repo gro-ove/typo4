@@ -2,6 +2,7 @@
 using System.Diagnostics;
 using System.IO;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading;
 using System.Threading.Tasks;
 using JetBrains.Annotations;
@@ -81,7 +82,9 @@ namespace TypoLib.Replacers.ScriptInterpreters {
                         sb.AppendLine(error);
                     }
 
-                    throw new ExternalInterpreterException(_executableName + " " + _arguments, p.ExitCode, output, error);
+                    TypoLogging.Write(sb.ToString());
+                    throw new ExternalInterpreterException(_executableName + " " + _arguments.Append(filename).JoinToString(" "),
+                            p.ExitCode, output, error);
                 }
 
                 p.Close();
@@ -94,7 +97,12 @@ namespace TypoLib.Replacers.ScriptInterpreters {
         }
 
         public bool IsInputSupported(string filename) {
-            return true;
+            try {
+                return !Regex.IsMatch(File.ReadAllText(filename), @"(^|#|//|\n|;)\s*""noinput""");
+            } catch (Exception e) {
+                TypoLogging.Write(e);
+                return true;
+            }
         }
 
         public void Dispose() { }

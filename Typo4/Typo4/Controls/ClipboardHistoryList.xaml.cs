@@ -3,6 +3,7 @@ using System.Linq;
 using System.Windows;
 using System.Windows.Forms;
 using FirstFloor.ModernUI;
+using FirstFloor.ModernUI.Commands;
 using FirstFloor.ModernUI.Presentation;
 using JetBrains.Annotations;
 using Typo4.Clipboards;
@@ -29,7 +30,14 @@ namespace Typo4.Controls {
             public ClipboardHistory History { get; }
 
             public BetterListCollectionView Pinned { get; }
+
             public BetterListCollectionView Recent { get; }
+
+            private DelegateCommand _removeRecentCommand;
+
+            public DelegateCommand RemoveRecentCommand => _removeRecentCommand ?? (_removeRecentCommand = new DelegateCommand(() => {
+                History.Items.ReplaceEverythingBy(History.Items.Where(x => x.IsPinned));
+            }));
 
             public ViewModel(ClipboardHistory history) {
                 History = history;

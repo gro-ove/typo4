@@ -53,7 +53,12 @@ namespace Typo4 {
                 return;
             }
 
-            var appGuid = ((GuidAttribute)Assembly.GetEntryAssembly().GetCustomAttributes(typeof(GuidAttribute), true).GetValue(0)).Value;
+            var mainAssembly = Assembly.GetEntryAssembly();
+            if (mainAssembly == null) {
+                return;
+            }
+
+            var appGuid = ((GuidAttribute)mainAssembly.GetCustomAttributes(typeof(GuidAttribute), true).GetValue(0)).Value;
             var mutexId = $@"Global\{{{appGuid}}}";
 
             if (args.Contains(WindowsHelper.RestartArg)) {

@@ -21,11 +21,15 @@ namespace Typo4.Clipboards {
             }
         }
 
-        private class ClipboardWatcher : Form {
+        private sealed class ClipboardWatcher : Form {
             private static ClipboardWatcher _instance;
             private static IntPtr _nextClipboardViewer;
             public static event EventHandler ClipboardChangeInner;
             public static bool HasAnyListeners => ClipboardChangeInner != null;
+
+            private ClipboardWatcher() {
+                Text = @"Typo4";
+            }
 
             public static void StartListening() {
                 if (_instance != null) return;

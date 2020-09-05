@@ -114,20 +114,26 @@ namespace TypoLib.Utils {
             }
         }
 
+        private static void SetClipboardTextInner([CanBeNull] string data) {
+            try {
+                if (string.IsNullOrEmpty(data)) {
+                    Clipboard.Clear();
+                } else {
+                    Clipboard.SetDataObject(data, true, 5, 100);
+                }
+            } catch (Exception e) {
+                TypoLogging.Write(e);
+            }
+        }
+
         /// <summary>
         /// Sets text to the clipboard.
         /// </summary>
         /// <param name="data">Data to set; if NULL, clipboard will be cleared instead.</param>
         private static void SetClipboardText([CanBeNull] string data) {
-            ClipboardHold?.Invoke(null, EventArgs.Empty);
-
-            if (string.IsNullOrEmpty(data)) {
-                Clipboard.Clear();
-            } else {
-                Clipboard.SetText(data);
-            }
-
-            Task.Delay(200).ContinueWith(t => ClipboardRelease?.Invoke(null, EventArgs.Empty));
+            HoldClipboard();
+            SetClipboardTextInner(data);
+            ReleaseClipboard();
         }
 
         /// <summary>
@@ -141,13 +147,29 @@ namespace TypoLib.Utils {
         /// <returns>IDisposable restoring text on Dispose().</returns>
         [NotNull]
         private static IDisposable Backup() {
-            ClipboardHold?.Invoke(null, EventArgs.Empty);
+            HoldClipboard();
             var data = GetClipboardText();
-            SetClipboardText(null);
+            SetClipboardTextInner(null);
             return new ActionAsDisposable(() => {
-                SetClipboardText(data);
-                Task.Delay(200).ContinueWith(t => ClipboardRelease?.Invoke(null, EventArgs.Empty));
+                SetClipboardTextInner(data);
+                ReleaseClipboard();
             });
+        }
+
+        private static int _holdCounter;
+
+        private static void HoldClipboard() {
+            if (_holdCounter == 0) {
+                ClipboardHold?.Invoke(null, EventArgs.Empty);
+            }
+            ++_holdCounter;
+        }
+
+        private static void ReleaseClipboard() {
+            --_holdCounter;
+            if (_holdCounter == 0) {
+                Task.Delay(200).ContinueWith(t => ClipboardRelease?.Invoke(null, EventArgs.Empty));
+            }
         }
 
         public static event EventHandler ClipboardHold;

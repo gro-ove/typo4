@@ -19,8 +19,8 @@ namespace TypoLib.Replacers {
 
             Register(".lua", new LuaInterpreter());
             Register(".exe", new ExternalInterpreter(null));
-            //Register(".js", new ExternalInterpreter("node.exe"));
-            Register(".js", new JsInterpreter());
+            Register(".js", new ExternalInterpreter("node.exe"));
+            // Register(".js", new JsInterpreter());
             Register(".py", new ExternalInterpreter("python.exe"));
             Register(".pl", new ExternalInterpreter("perl.exe"));
             Register(".sh", new ExternalInterpreter("bash.exe"));
@@ -68,18 +68,20 @@ namespace TypoLib.Replacers {
             return GetInterpreter(scriptId, out var filename)?.IsInputSupported(filename) != false;
         }
 
-        public Task<string> ReplaceAsync(int scriptId, string originalText, CancellationToken cancellation) {
+        public async Task<string> ReplaceAsync(int scriptId, string originalText, CancellationToken cancellation) {
             try {
                 var interpreter = GetInterpreter(scriptId, out var filename);
+
+                TypoLogging.Write("Run command: " + filename + ", orig.=" + originalText + ", iterp.=" + interpreter);
                 if (interpreter != null) {
-                    return interpreter.ExecuteAsync(filename, originalText, cancellation);
+                    return await interpreter.ExecuteAsync(filename, originalText, cancellation);
                 }
 
                 TypoLogging.Write($"Supported script not found: {scriptId}");
-                return Task.FromResult<string>(null);
+                return null;
             } catch (Exception e) {
-                TypoLogging.Write(e);
-                throw;
+                TypoLogging.NonFatalErrorNotify("Failed to run a script", "Check if all required libraries are ready.", e);
+                return null;
             }
         }
 

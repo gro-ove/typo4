@@ -38,7 +38,7 @@ namespace TypoLib.Replacers.ScriptInterpreters {
 
         public bool IsInputSupported(string filename) {
             var script = GetScript(filename);
-            return script.IndexOf("without input", StringComparison.OrdinalIgnoreCase) == -1;
+            return script.IndexOf("\"noinput\"", StringComparison.OrdinalIgnoreCase) == -1;
         }
 
         public void Dispose() { }

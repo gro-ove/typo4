@@ -265,6 +265,6 @@ Typo4/_/*
 *.sln.DotSettings
 
 Typo4Data/Emojis/Graphics/EmojiOne.zip
-Typo4Data/Emojis/Descriptions/EmojiCopy.json
+# Typo4Data/Emojis/Descriptions/EmojiCopy.json
 Typo4Data/typo4.sublime-*
 Typo4Data/Values.data

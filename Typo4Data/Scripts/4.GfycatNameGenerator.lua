@@ -1,3 +1,5 @@
+-- "noinput"
+
 local adjectives = {
 "abandoned",
 "able",

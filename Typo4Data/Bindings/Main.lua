@@ -157,6 +157,10 @@ local ctrl = {
 local debugMode = false
 
 return function(keys, options)
+  if not options.shift and not options.ctrl and not options.win and keys == 'Q' then
+    return ''..math.random(9)..(options.alt and math.random(9)..math.random(9)..math.random(9) or '')
+  end
+
   if not options.alt and not options.shift and not options.ctrl and not options.win then
     return base[keys]
   end

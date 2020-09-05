@@ -13,7 +13,7 @@
     </CheckBox>
 
     <CheckBox IsChecked="{Binding ClosePopupsOnInsert}">
-      <Label Content="Close popups on insert, unless Ctrl is pressed" />
+      <Label Content="Close popups on insert unless Ctrl is pressed" />
     </CheckBox>
 
   </mui:SpacingStackPanel>

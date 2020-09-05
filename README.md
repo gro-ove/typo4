@@ -10,7 +10,7 @@ an emoji.
 
 ### Features:
 
-- Press Caps Lock to replace “-” with “—” where appropriate, add proper quotes and more in currently active input area¹:
+- Press Caps Lock while typing to replace where appropriate “-” with “—”, add proper quotes and more¹:
   - Actual changes are set by Lua-scripts in [Replacements](https://github.com/gro-ove/typo4/tree/master/Typo4Data/Replacements) running in order;
   - If any text is selected, it will be processed (instead of processing all of the text in active input area);
   - Use Caps Lock+Ctrl to alter text that is currently in the clipboard.
@@ -38,7 +38,3 @@ an emoji.
 ---
 
 ¹ App uses keyboard hooks and sends Ctrl+C/Ctrl+A/Ctrl+V keyboard events. As straightforward as it gets, but this way it provides pretty good compatibility with various different input areas. Even some videogames supporting those shortcuts will work. However, UWP apps sometimes bug out, but at least for me quite a few of them bug out on a regular basis anyway.
-
-### License:
-
-MIT.
